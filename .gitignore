@@ -1,0 +1,85 @@
+# Secrets and local environment
+.env
+.env.*
+!.env.example
+*.key
+*.pem
+
+# Python
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# uv / packaging
+*.egg-info/
+dist/
+build/
+
+# Node / frontend
+node_modules/
+frontend/node_modules/
+frontend/dist/
+*.tsbuildinfo
+
+# Local databases and operational state
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+
+# Copyrighted source material and derived prose
+# Keep project books and any full-text derivatives out of Git.
+data/raw/
+data/source/
+data/books/
+data/cleaned/
+data/processed/
+data/windows/
+data/training/
+data/validation/
+data/benchmark_text/
+*.epub
+*.mobi
+*.azw
+*.azw3
+*.pdf
+
+# Model weights, checkpoints, adapters, and large training artifacts
+checkpoints/
+models/
+outputs/
+runs/
+wandb/
+*.safetensors
+*.gguf
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# Local annotation exports that may contain copyrighted prose
+annotation_runs/
+exports/private/
+
+# Logs and temporary files
+logs/
+*.log
+tmp/
+temp/
+.cache/
+
+# OS / editors
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Keep intentionally redistributable research artifacts under tracked paths
+# such as manifests/, annotations/, configs/, prompts/, and specs/.
