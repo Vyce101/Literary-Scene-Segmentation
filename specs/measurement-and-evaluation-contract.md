@@ -34,17 +34,17 @@ A literary scene boundary is represented by the unit ID of the **first unit of t
 
 Chapter and section headings attach to the material that follows them. If a genuine new scene begins at a chapter or section transition, the boundary is placed **before the heading**, not between the heading and its following prose.
 
-The teacher outputs only boundary unit IDs. It does not output separator characters. Rendering separators such as `***` or `///` is a deterministic application-layer operation.
+The deployed model predicts both literary scene boundaries and meaningful document-structure boundaries through the same `boundaries_before` output. Each predicted boundary is represented by the unit ID of the first unit after the boundary, with its boundary type preserved in annotation and evaluation metadata. The teacher outputs boundary unit IDs; their boundary types are recorded in annotation metadata. It does not output separator characters. Rendering separators such as `***` or `///` is a deterministic application-layer operation.
 
 ## 4. Non-Prose / Document-Structure Boundaries
 
 Front matter and other non-prose structural material may remain present in operational inputs so the deployed system can handle real books.
 
-However, non-prose/document-structure boundaries are a **separate annotation type** from literary scene boundaries.
+Document-structure boundaries mark transitions between coherent non-prose sections, such as copyright/publication information, a table of contents, a dedication or preface, and the narrative. Individual lines or items within one coherent section do not each receive a separate document-structure boundary.
 
-They must be stored separately in annotation metadata even if the application can render both using the same visible separator.
+Document-structure boundaries are a **separate annotation type** from literary scene boundaries, and the type must be preserved in annotation and evaluation metadata even though the application renders both through the same `boundaries_before` output and may use the same visible separator.
 
-The **primary literary-scene benchmark excludes non-prose/document-structure boundaries** from scene-quality scoring. Handling of front matter, tables of contents, copyright pages, and similar material may be reported separately as an operational robustness result.
+The **primary literary-scene metric scores literary scene boundaries separately** and excludes document-structure boundaries from that score. Document-structure handling may be evaluated and reported separately as an operational robustness result.
 
 Do not silently mix document-structure boundaries into the literary-scene metric.
 
@@ -92,7 +92,7 @@ No FINAL BENCHMARK result may be used to alter model weights, prompts, training 
 
 Use the approved professional-fiction training corpus. The target is approximately 6 million unique cleaned words before contextual overlap.
 
-Do not change the benchmark split merely to force TRAIN to equal exactly 6,000,000 words.
+TRAIN author assignments remain fixed. After deterministic cleaned word counts are measured, the exact number of volumes used from already-approved TRAIN authors may be adjusted to target approximately 6 million unique cleaned words before contextual overlap. Do not change the benchmark split merely to force TRAIN to equal exactly 6,000,000 words. All NieR material is excluded from TRAIN.
 
 ### VALIDATION
 
@@ -101,7 +101,9 @@ Validation includes the two approved fanfiction works:
 - *Making Arrangements* — Crowns of Laurels
 - *Second Wind* — Quill Q
 
-Validation must also include **at least one professionally published work by a completely held-out author** who appears in neither TRAIN nor FINAL BENCHMARK.
+Validation also includes the professionally published work **_NieR:Automata — Long Story Short_**, whose author is completely held out from TRAIN and FINAL BENCHMARK. *Short Story Long* remains unused/reserve material.
+
+Validation must include **at least one professionally published work by a completely held-out author** who appears in neither TRAIN nor FINAL BENCHMARK.
 
 The professional validation author/work must be selected and recorded before training begins.
 
@@ -119,7 +121,7 @@ Current approved final material:
 - George R. R. Martin — *A Game of Thrones*
 - SunSunSun — *Alya Sometimes Hides Her Feelings in Russian*, Volumes 1–3
 
-The final benchmark remains sealed until the model, prompt, training procedure, checkpoint-selection rule, and evaluation procedure are fixed.
+The final benchmark remains sealed until the model, prompt, training procedure, checkpoint-selection rule, and evaluation procedure are fixed. The FINAL BENCHMARK assignments above remain unchanged.
 
 ## 8. Translator Leakage Audit
 
