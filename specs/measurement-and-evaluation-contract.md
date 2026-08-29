@@ -34,13 +34,22 @@ A literary scene boundary is represented by the unit ID of the **first unit of t
 
 Chapter and section headings attach to the material that follows them. If a genuine new scene begins at a chapter or section transition, the boundary is placed **before the heading**, not between the heading and its following prose.
 
-The deployed model predicts both literary scene boundaries and meaningful document-structure boundaries through the same `boundaries_before` output. Each predicted boundary is represented by the unit ID of the first unit after the boundary, with its boundary type preserved in annotation and evaluation metadata. The teacher outputs boundary unit IDs; their boundary types are recorded in annotation metadata. It does not output separator characters. Rendering separators such as `***` or `///` is a deterministic application-layer operation.
+Both teacher annotations and the fine-tuned model use the same two-list JSON output:
+
+```json
+{
+  "boundaries_before": [],
+  "document_boundaries_before": []
+}
+```
+
+`boundaries_before` contains all predicted boundary unit IDs. `document_boundaries_before` contains the subset of those IDs that separate meaningful document/non-narrative structure. Every ID in `document_boundaries_before` must also appear in `boundaries_before`. Boundary types are preserved in annotation and evaluation metadata. The output does not contain separator characters. Rendering separators such as `***` or `///` is a deterministic application-layer operation.
 
 ## 4. Non-Prose / Document-Structure Boundaries
 
 Front matter and other non-prose structural material may remain present in operational inputs so the deployed system can handle real books.
 
-Document-structure boundaries mark transitions between coherent non-prose sections, such as copyright/publication information, a table of contents, a dedication or preface, and the narrative. Individual lines or items within one coherent section do not each receive a separate document-structure boundary.
+Document-structure boundaries mark transitions between coherent document/non-narrative material such as copyright/publication information, tables of contents, dedications/prefaces, acknowledgements, appendices, and the narrative itself. Individual lines or items within one coherent section do not each receive a separate document-structure boundary. Ordinary chapter or section headings are not document boundaries merely because they are structural headings.
 
 Document-structure boundaries are a **separate annotation type** from literary scene boundaries, and the type must be preserved in annotation and evaluation metadata even though the application renders both through the same `boundaries_before` output and may use the same visible separator.
 
@@ -102,10 +111,6 @@ Validation includes the two approved fanfiction works:
 - *Second Wind* — Quill Q
 
 Validation also includes the professionally published work **_NieR:Automata — Long Story Short_**, whose author is completely held out from TRAIN and FINAL BENCHMARK. *Short Story Long* remains unused/reserve material.
-
-Validation must include **at least one professionally published work by a completely held-out author** who appears in neither TRAIN nor FINAL BENCHMARK.
-
-The professional validation author/work must be selected and recorded before training begins.
 
 VALIDATION may be used for prompt/inference-policy development, training hyperparameter choices, checkpoint/model selection, decisions about additional training, and failure analysis.
 
