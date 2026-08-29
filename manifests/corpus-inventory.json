@@ -1,0 +1,597 @@
+{
+  "files": [
+    {
+      "relative_path": "TEST/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 01 - cleaned.txt",
+      "sha256": "462567c81c822e04f87a89904d733a32c1633b6686b7c633f5ba5b0d39951c2b",
+      "byte_size": 268774,
+      "word_count": 45103
+    },
+    {
+      "relative_path": "TEST/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 02 - cleaned.txt",
+      "sha256": "ed0378b85e79cc694b106ef55bd3e972481314f306c3923bf5aa4f169d0380bd",
+      "byte_size": 308089,
+      "word_count": 51453
+    },
+    {
+      "relative_path": "TEST/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 03 - cleaned.txt",
+      "sha256": "dee49b33693c4379f27d4cdc058c4e4e31c6263fc1dd897f6f8e6cea8bc1fc81",
+      "byte_size": 415527,
+      "word_count": 69805
+    },
+    {
+      "relative_path": "TEST/Game of Thrones/A_Game_of_Thrones_cleaned.txt",
+      "sha256": "9b4a63d711c020d77a7cdec48afcb39810b195f55efc67cc53be37a71ade2455",
+      "byte_size": 1697466,
+      "word_count": 304730
+    },
+    {
+      "relative_path": "TEST/Harry Potter/Harry Potter 1 - carefully rechecked cleaned.txt",
+      "sha256": "60b102aea078fb523aa61e6436a95ca3caadb1a16e990749af3521646c99bfd1",
+      "byte_size": 463854,
+      "word_count": 79657
+    },
+    {
+      "relative_path": "TEST/Harry Potter/Harry Potter 2 - audited cleaned.txt",
+      "sha256": "c74729dedf47eb3096d5065ce83f80883e46a1565cdaa07ceaa279c7f9b681f8",
+      "byte_size": 536579,
+      "word_count": 90717
+    },
+    {
+      "relative_path": "TEST/Harry Potter/Harry Potter 3 - carefully rechecked cleaned.txt",
+      "sha256": "c2ebf9eee102472f9cfd72c6cbb6f29afa13226261ba6a94fdb35f39ccf125cb",
+      "byte_size": 652326,
+      "word_count": 107060
+    },
+    {
+      "relative_path": "TEST/Harry Potter/Harry Potter 4 - carefully rechecked cleaned.txt",
+      "sha256": "2a6725d0e1b7625c3f41fe9612b1bd213f20c9228dfb659e10be3257f90e1857",
+      "byte_size": 1147808,
+      "word_count": 194946
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 01 - cleaned.txt",
+      "sha256": "1c9e91ba2617abced479d37b8b31bb46e78246810ef6ce4811b4f750c1bf18b6",
+      "byte_size": 400256,
+      "word_count": 66224
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 02 - cleaned.txt",
+      "sha256": "1ce3410230faa11a37706d9e8485940e80e6f55faa13aab5f259036bcef97214",
+      "byte_size": 394064,
+      "word_count": 65088
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 03 - cleaned.txt",
+      "sha256": "b16fdd0b61cdc68ccebde062cfa9e8150aeb01a2901f76d63f84586a2d1d004f",
+      "byte_size": 406352,
+      "word_count": 68185
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 04 - cleaned.txt",
+      "sha256": "6c9f67ca04fee08c1e638d499c345748e85fa75f1fe2bbcf2063d0539f371fc6",
+      "byte_size": 411086,
+      "word_count": 68675
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 04.5 - cleaned.txt",
+      "sha256": "3939470f21742abdcb3fa559f38edb9cfcc5ba9b99d6c241163b3277455d0e9c",
+      "byte_size": 345808,
+      "word_count": 56896
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 05 - cleaned.txt",
+      "sha256": "1a9fab61f98e656671b3cecace3bff3094b8dab2d9e037e62d80712261be275f",
+      "byte_size": 393325,
+      "word_count": 64874
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 06 - cleaned.txt",
+      "sha256": "1e63b2f3abadabe2642150af0135599cbf8a47eff0b53b5354b86a5d579a83b2",
+      "byte_size": 364437,
+      "word_count": 59651
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 07 - cleaned.txt",
+      "sha256": "d28701ad541fa771aed3c80a207d57bc3edf2b59452ea0e5cfb29179c6f8b2b4",
+      "byte_size": 317569,
+      "word_count": 52946
+    },
+    {
+      "relative_path": "TRAIN/Classroom of the Elite/Classroom of the Elite - Volume 07.5 - cleaned.txt",
+      "sha256": "e005b31ebede33ed30e722cda85a1f872dd9d4bd05bf6494eb6b288e0436f4b1",
+      "byte_size": 256247,
+      "word_count": 42289
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 01 [Yen Press][Kobo](1) - CLEANED.txt",
+      "sha256": "e9add5532a9fea39556976bc7e7b5ac0317d5e6490c6446e6042953980c97095",
+      "byte_size": 369793,
+      "word_count": 62862
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 02 [Yen Press][Kobo] - CLEANED.txt",
+      "sha256": "3b0eefce142a8dacf9f46d99e35a3cf8b6acc15d48000084b310fc26ca624b61",
+      "byte_size": 381240,
+      "word_count": 64206
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 03 [Yen Press][Kobo](1) - CLEANED.txt",
+      "sha256": "8cefe9de82556c8244b6668900b2da969c01cc30e2cd66f2a552fc4a5dd94b2d",
+      "byte_size": 297289,
+      "word_count": 49818
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 04 [Yen Press][Kobo](1) - CLEANED.txt",
+      "sha256": "9ddda477d3bc217dd6c3f066591bf324c0d79fc6ce145a92f52ed57e7e01c548",
+      "byte_size": 327298,
+      "word_count": 55586
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 05 [Yen Press][KindleHQ](1) - CLEANED.txt",
+      "sha256": "05c8a290b5c77a249c16bc89aa2b2699c49726f33685eac6e21fb582526a6ef5",
+      "byte_size": 356278,
+      "word_count": 59882
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 06 [Yen Press][Kobo](1) - CLEANED.txt",
+      "sha256": "30bdd1fa97d250be8f5954352ea2552ccfaa81bff32d278894b39ae0533292a3",
+      "byte_size": 422798,
+      "word_count": 71306
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 07 [Yen Press][Kobo] - CLEANED.txt",
+      "sha256": "0bc83ad876e31ada44f74163b4f899d0232b6d02bdfbace551101652ab8d24a9",
+      "byte_size": 417089,
+      "word_count": 71015
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer - Volume 08 [Yen Press][Kobo] - CLEANED.txt",
+      "sha256": "d81ab12d73435e2ae3e632619be60af69ab32f1c2c7932767541101d8130ce95",
+      "byte_size": 422861,
+      "word_count": 71613
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer Side Story - Year One - Volume 01 [Yen Press][KindleHQ] - CLEANED.txt",
+      "sha256": "bad15e07f859a45f14b1db34cf02675c749ea4bda2f22699d54356e6c45320f7",
+      "byte_size": 326780,
+      "word_count": 56814
+    },
+    {
+      "relative_path": "TRAIN/Goblin Slayer/Goblin Slayer Side Story - Year One - Volume 02 [Yen Press][Kobo] - CLEANED.txt",
+      "sha256": "1d6dada65ac428804aaa0f316bd983dea62991e51620bec16b32b9a3dcdb0a15",
+      "byte_size": 303170,
+      "word_count": 51669
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 01 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "959dbbe1ca63d2cbfbc4c24fc140b64fa1e561a84f62bc9480b186b97c978217",
+      "byte_size": 247743,
+      "word_count": 42801
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 02 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "eb4222494b38d9f64beefb61ce8387d2d83f7e7d9a47c4fb9868efbbe7a77d7f",
+      "byte_size": 242811,
+      "word_count": 42546
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 03 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "628d57ce8de38a121c75b52290cd535f076e8c3faf2746e7c2b0973a7a835792",
+      "byte_size": 278930,
+      "word_count": 48281
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 04 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "6f022647667e98b3ec306e7ea6f23a967b7d33377995bf82b6fb7b7009f8f3ac",
+      "byte_size": 269232,
+      "word_count": 46835
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 05 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "de33ad1ffdfd5cadbd51fa9f3d3c2e036929724d904f96201de885b7fb1fecbe",
+      "byte_size": 295899,
+      "word_count": 51317
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 06 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "63f67170f7aae0b3e081d452b9c1bdb207343e1d4c8e9befce4b4658b4f9800c",
+      "byte_size": 317959,
+      "word_count": 55540
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 07 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "a5fc66f7dee62938f2bf408d73be6a5bd3801af86dbbf1eb0ca1a9df274a989f",
+      "byte_size": 312682,
+      "word_count": 55011
+    },
+    {
+      "relative_path": "TRAIN/KonoSuba/KonoSuba - Volume 08 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "984083f0db43bd637f386dc98670919ba0e6112952cc338752a2323f1d09344b",
+      "byte_size": 301344,
+      "word_count": 52291
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 01 - cleaned.txt",
+      "sha256": "2b7578d0b9e39e8650be172f9f3f5e34a8a4d39ed9769d076b7c53cd2fad4402",
+      "byte_size": 349698,
+      "word_count": 62460
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 02 - cleaned.txt",
+      "sha256": "8d8fd9177558cd2fdbcaf95aea5aeee4a2bcc7a1c34e2bfb49890cd02447b12e",
+      "byte_size": 332970,
+      "word_count": 59197
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 03 - cleaned.txt",
+      "sha256": "2e5fc7afbb0759ee09fc1a87fbcc4f538a75a765c8c2cdf15788d753cc9ca35f",
+      "byte_size": 458702,
+      "word_count": 79469
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 04 - cleaned.txt",
+      "sha256": "297d049e2adb211d2d1342962132a73beb84bc39b9a6f52288ce8925e730652f",
+      "byte_size": 378267,
+      "word_count": 67191
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 05 - cleaned.txt",
+      "sha256": "5b37d3ba0f7bbba576ad14768659de86cfce512fae80fd067633d273cabecb69",
+      "byte_size": 399804,
+      "word_count": 70738
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 06 - cleaned.txt",
+      "sha256": "f07ecb63e4d5f11c30a8fd7c3c46363030944a85202d2b06b81d5e646c818f83",
+      "byte_size": 386568,
+      "word_count": 68590
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 07 - cleaned.txt",
+      "sha256": "cde1213744ead84ecf81d8e057cfd54b6ea52f35dd188af6bc33a80128cbb0c1",
+      "byte_size": 367096,
+      "word_count": 64689
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 08 - cleaned.txt",
+      "sha256": "7659265b83a2e4b481f4e68703c58e4e67400adb4b6c00372adaef9ba1f48633",
+      "byte_size": 348202,
+      "word_count": 60290
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 09 - cleaned.txt",
+      "sha256": "88243dada94c3dc73afd96920f116180b9becd5b74029295d31826b92c8388b5",
+      "byte_size": 456341,
+      "word_count": 79530
+    },
+    {
+      "relative_path": "TRAIN/Mushoku Tensei/Mushoku Tensei - Jobless Reincarnation - Volume 10 - cleaned.txt",
+      "sha256": "1a4af928e0c6a1651b7d771d2e60a3b880684d155c4b85bc8377fb1f0e4107c4",
+      "byte_size": 354054,
+      "word_count": 61806
+    },
+    {
+      "relative_path": "TRAIN/Overlord/Overlord Volume 01 - The Undead King.txt",
+      "sha256": "e0f45e51a882c4a4b5b8cd260f534c21b264b28a49bfbfaf4d4f7c2f4678ec7a",
+      "byte_size": 480423,
+      "word_count": 82491
+    },
+    {
+      "relative_path": "TRAIN/Overlord/Overlord Volume 02 - The Dark Warrior.txt",
+      "sha256": "83f27fafa0b504fcbd4a185ae500b93337be919d623bcff5d40013466a7e9b59",
+      "byte_size": 474688,
+      "word_count": 80816
+    },
+    {
+      "relative_path": "TRAIN/Overlord/Overlord Volume 03 - The Bloody Valkyrie.txt",
+      "sha256": "d88f96eb94f4f56a51d298ffa4de7053c97801493ffb83d9ce60365014de054c",
+      "byte_size": 536912,
+      "word_count": 91171
+    },
+    {
+      "relative_path": "TRAIN/Overlord/Overlord Volume 04 - The Lizardman Heroes.txt",
+      "sha256": "8f77158ff07c70c2edc37f99e2d8f8b55f4dd3ed0e95dc1027a3e20df1b4a461",
+      "byte_size": 535793,
+      "word_count": 90903
+    },
+    {
+      "relative_path": "TRAIN/Overlord/Overlord Volume 05 - The Men in the Kingdom Part I.txt",
+      "sha256": "bdb96dbb26b8120db34da98d989b35f175cf56e98dfaa8e6bf8932097dfb66e5",
+      "byte_size": 471043,
+      "word_count": 81953
+    },
+    {
+      "relative_path": "TRAIN/Overlord/Overlord Volume 06 - The Men in the Kingdom Part II.txt",
+      "sha256": "028244d20f1a42a60ecadc14e21bede1ce4f21b94a37a894392d6d85ade378ab",
+      "byte_size": 556595,
+      "word_count": 95528
+    },
+    {
+      "relative_path": "TRAIN/Overlord/Overlord Volume 07 - The Invaders of the Large Tomb.txt",
+      "sha256": "a8d758e5e06ab45921305ecf732f9004139f7a13437c7847540a6f2dfbb799e2",
+      "byte_size": 522373,
+      "word_count": 89211
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 01 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "94aa41660ba719c47a1c2caa3b85b2d60e704e77e72692afa745858089edc8d8",
+      "byte_size": 424109,
+      "word_count": 74977
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 02 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "a891378d341f4d5c7055782ed85060dc1990ce2926d9fa4e9bec3bdcabd8c622",
+      "byte_size": 411246,
+      "word_count": 69926
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 03 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "b79feb7d2783e15d474b413bfe60e3d3310d532baf7743a5529d180976f1c51e",
+      "byte_size": 408078,
+      "word_count": 70428
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 04 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "da613f81b6561d0357e9be61b1f457642b55822a49f4e9cc37fd597c2bd5b414",
+      "byte_size": 420904,
+      "word_count": 70734
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 05 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "876df65772d76d90653b8f7687b81e3eca115745cbb036ece4793d91e9323e0b",
+      "byte_size": 400731,
+      "word_count": 68320
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 06 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "8b9f8b611484afb0d131a5f99b4570ea93907516c516f0a086d1493c127a1ebe",
+      "byte_size": 399776,
+      "word_count": 67913
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 07 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "2db47c52e1d7783369392f6b9bf0590bd48c0e0c0173df14d75a6a4e8b30b546",
+      "byte_size": 398197,
+      "word_count": 67183
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World - Volume 08 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "13b8110f91f7a5dfa1aada0b127b4ff22646323987c5649657ce08fe0b820529",
+      "byte_size": 423301,
+      "word_count": 70384
+    },
+    {
+      "relative_path": "TRAIN/ReZERO/ReZero - Starting Life in Another World Ex - Volume 01 [Yen Press][Kobo] - cleaned.txt",
+      "sha256": "e7fef2e8e98eb3d72beda7b99d9e67338ad6aa51d5e736d78c5983afb4d3ce6c",
+      "byte_size": 385789,
+      "word_count": 66881
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 01 - cleaned.txt",
+      "sha256": "359b7afaea67dd1ebc25f10f9f95d29401d2e7dee531bc607723af4130c194b7",
+      "byte_size": 324440,
+      "word_count": 54980
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 02 - cleaned.txt",
+      "sha256": "6513212a75ce8ea160be81cc024dab75c50dcdf2a281af0ed2705badf68a4ba9",
+      "byte_size": 423751,
+      "word_count": 72354
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 03 - cleaned.txt",
+      "sha256": "481d230b405977652ac9d13c224ce70fa59e344128bb43974dad702c66fd3106",
+      "byte_size": 363076,
+      "word_count": 62318
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 04 - cleaned.txt",
+      "sha256": "c5793454367ca04ee98640052a1451a599e78a7041e19ed7c8650265a23ca68e",
+      "byte_size": 359661,
+      "word_count": 61732
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 05 - cleaned.txt",
+      "sha256": "53c282fd329436e20260cadc113c85a102eceb8efde75ad30ae00f6002fbd779",
+      "byte_size": 373123,
+      "word_count": 64351
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 06 - cleaned.txt",
+      "sha256": "385fb83079a71642a9bc8ab3ba3769232ba5d297e965a2ae0c3577960cf7bc03",
+      "byte_size": 323159,
+      "word_count": 55487
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 07 - cleaned.txt",
+      "sha256": "1354f678ce7107ab687eaf6c264f377998b7c536dd96371e8b2fcdaefa503919",
+      "byte_size": 279481,
+      "word_count": 48443
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 08 - cleaned.txt",
+      "sha256": "8d5dbf7f53fb005cfc3611107d44759e644522080c7d9be185f6617306a6434b",
+      "byte_size": 265010,
+      "word_count": 45655
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 09 - cleaned.txt",
+      "sha256": "474b2dfad5ddc05e9eb9e841f52b369df71b63264440a17557debb6da83fa06d",
+      "byte_size": 295609,
+      "word_count": 51088
+    },
+    {
+      "relative_path": "TRAIN/Spice and Wolf/Spice and Wolf Volume 10 - cleaned.txt",
+      "sha256": "ceeefb00b5ec9e615bd9a7c1d19706256546725595214e002cf00d6acf245337",
+      "byte_size": 388491,
+      "word_count": 67002
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 1.cleaned.txt",
+      "sha256": "8ba5a2829bbf5ae24437a6d96b3f3b437b3b5fb890603f0468bbae542920087f",
+      "byte_size": 394508,
+      "word_count": 67829
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 2.cleaned.txt",
+      "sha256": "de21ea47dc168226677036c7740e9efdc3e1b765a787608c93085865c0afd672",
+      "byte_size": 440375,
+      "word_count": 76017
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 3.cleaned.txt",
+      "sha256": "862d2fa79f745af8a931c32a58f136ebd5f3ed2f85c0242c79b5a2e1d8aa0e96",
+      "byte_size": 512901,
+      "word_count": 87602
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 4.cleaned.txt",
+      "sha256": "671b389e34e1163a40e87b190973b6d73f2f42289c74e1eadbbff785c8acfc99",
+      "byte_size": 466096,
+      "word_count": 80057
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 5.cleaned.txt",
+      "sha256": "f4a1a9c380ec1f17e8565f895e29e567e881333452315f8a5e07ebd9f1070107",
+      "byte_size": 470361,
+      "word_count": 80863
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 6.cleaned.txt",
+      "sha256": "4df2a793381bf0ade2c76152270902d904e65effce9fc6cdf279dfe4bc051625",
+      "byte_size": 495853,
+      "word_count": 85492
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 7.cleaned.txt",
+      "sha256": "01d020a8850dc224fd6c5cbca981e5e6b2de30041a86a529ed041fe31455ed2b",
+      "byte_size": 409039,
+      "word_count": 70356
+    },
+    {
+      "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 8.cleaned.txt",
+      "sha256": "535cf7155ed2f275121f6a2f4f06364e45a4483c0cd77eda7af94fb517afb8f2",
+      "byte_size": 431091,
+      "word_count": 73731
+    },
+    {
+      "relative_path": "TRAIN/The Eminence in Shadow/The Eminence in Shadow - Volume 01 - cleaned.txt",
+      "sha256": "05d39751e9cd66a6ea71ef7be6efd4fd5f9691a7db314feffd368f87a23e6ad8",
+      "byte_size": 350035,
+      "word_count": 58761
+    },
+    {
+      "relative_path": "TRAIN/The Eminence in Shadow/The Eminence in Shadow - Volume 02 - cleaned.txt",
+      "sha256": "09419371b598962aab5c237b77fb971cb10f37a6d59c3d657eac00f15f04e655",
+      "byte_size": 346168,
+      "word_count": 58058
+    },
+    {
+      "relative_path": "TRAIN/The Eminence in Shadow/The Eminence in Shadow - Volume 03 - cleaned.txt",
+      "sha256": "d88df8a99c77177442485f54c53c4a8489421fbdd0d6393ee906796eb72a19a1",
+      "byte_size": 354481,
+      "word_count": 58957
+    },
+    {
+      "relative_path": "TRAIN/The Eminence in Shadow/The Eminence in Shadow - Volume 04 - cleaned.txt",
+      "sha256": "4dc6355147627e717e8482b424b360cacef97c819bf5b242f50fa33decf70cdc",
+      "byte_size": 351194,
+      "word_count": 59292
+    },
+    {
+      "relative_path": "TRAIN/The Eminence in Shadow/The Eminence in Shadow - Volume 05 - cleaned.txt",
+      "sha256": "bcf38dff677a31ce319d3895c6048aa54494a3b766fb23a7ebb3249fb94995e2",
+      "byte_size": 348093,
+      "word_count": 57807
+    },
+    {
+      "relative_path": "TRAIN/The Eminence in Shadow/The Eminence in Shadow - Volume 06 - cleaned.txt",
+      "sha256": "8a0e70304cf1f10e7db260d6f235ef15ab19f6fd9a0a81a3abc73cc9a263d47e",
+      "byte_size": 329220,
+      "word_count": 54646
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 01 - cleaned.txt",
+      "sha256": "23dd943cff31ce0c2938bfead7b4def84ca8f58b28f5a6ed90f5304cb9b250c0",
+      "byte_size": 348359,
+      "word_count": 64180
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 02 - cleaned.txt",
+      "sha256": "e481910987026047153130360d725cf8650db9c947446794b43877e7a74be754",
+      "byte_size": 365764,
+      "word_count": 66852
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 03 - cleaned.txt",
+      "sha256": "c584f1bb73336f1112ca97137fd212d9727e392792b076beeb9c3bb279e23139",
+      "byte_size": 392125,
+      "word_count": 70692
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 04 - cleaned.txt",
+      "sha256": "ce996909657d0b548c0ff513343b1f1163171fad7fdba0340a6a28984232eccd",
+      "byte_size": 381656,
+      "word_count": 66917
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 05 - cleaned.txt",
+      "sha256": "72ab189d9b3d3fccc3e286d687dec22a95bf5c52ed7bdab89dcb49a17d494e40",
+      "byte_size": 410658,
+      "word_count": 73231
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 06 - cleaned.txt",
+      "sha256": "a0ab6c503ce30edea87faddb736b05cd6ac5813de38c73fc8dcd3053375ca8c7",
+      "byte_size": 431305,
+      "word_count": 77114
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 07 - cleaned.txt",
+      "sha256": "bd13369d9529a4ad4251d4854dd867b599739375b87a119262c22dc0b0559483",
+      "byte_size": 412354,
+      "word_count": 73516
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 08 - cleaned.txt",
+      "sha256": "d4715039e93bb6c090ee26bab37a96e0e9b577e0e29d0d79d5973aa8b584baa0",
+      "byte_size": 401096,
+      "word_count": 71279
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 09 - cleaned.txt",
+      "sha256": "98b0cac9c720e42223e84c8377dac472887b125d314a216f1c53209a545fdccd",
+      "byte_size": 410259,
+      "word_count": 73247
+    },
+    {
+      "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 10 - cleaned.txt",
+      "sha256": "c68daef60388101123038b219a8ad09a2cde019f5f18b2c411cca6ccc0f4480a",
+      "byte_size": 433500,
+      "word_count": 76857
+    },
+    {
+      "relative_path": "VALIDATION/Naruto/Making_Arrangements_by_CrownsofLaurels_cleaned.txt",
+      "sha256": "62f7fcb4e6011d56bcdbc4b6181d8fa9af88657048e4a7e545befcc29078cb40",
+      "byte_size": 1129420,
+      "word_count": 194952
+    },
+    {
+      "relative_path": "VALIDATION/Naruto/Second_Wind_by_Quill_Q_cleaned.txt",
+      "sha256": "158d876c051a6ab333caad5b5fdd9b58979e564aedd92c254d11f58409d27b06",
+      "byte_size": 1097022,
+      "word_count": 197506
+    },
+    {
+      "relative_path": "VALIDATION/NieR Automata/NieR_Automata_Volume_01_Long_Story_Short_cleaned.txt",
+      "sha256": "a9ea7f6d71c0d73ed99ec4311205f935cae35b84b61dc953c79af20aa4258ec8",
+      "byte_size": 348917,
+      "word_count": 58618
+    }
+  ],
+  "totals": {
+    "file_count": 98,
+    "byte_size": 41410074,
+    "word_count": 7128310
+  }
+}
