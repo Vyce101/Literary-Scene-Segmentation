@@ -1,49 +1,49 @@
 {
   "files": [
     {
-      "relative_path": "TEST/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 01 - cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 01 - cleaned.txt",
       "sha256": "462567c81c822e04f87a89904d733a32c1633b6686b7c633f5ba5b0d39951c2b",
       "byte_size": 268774,
       "word_count": 45103
     },
     {
-      "relative_path": "TEST/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 02 - cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 02 - cleaned.txt",
       "sha256": "ed0378b85e79cc694b106ef55bd3e972481314f306c3923bf5aa4f169d0380bd",
       "byte_size": 308089,
       "word_count": 51453
     },
     {
-      "relative_path": "TEST/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 03 - cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Alya Sometimes Hides Her Feelings in Russian/Alya Sometimes Hides Her Feelings in Russian - Volume 03 - cleaned.txt",
       "sha256": "dee49b33693c4379f27d4cdc058c4e4e31c6263fc1dd897f6f8e6cea8bc1fc81",
       "byte_size": 415527,
       "word_count": 69805
     },
     {
-      "relative_path": "TEST/Game of Thrones/A_Game_of_Thrones_cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Game of Thrones/A_Game_of_Thrones_cleaned.txt",
       "sha256": "9b4a63d711c020d77a7cdec48afcb39810b195f55efc67cc53be37a71ade2455",
       "byte_size": 1697466,
       "word_count": 304730
     },
     {
-      "relative_path": "TEST/Harry Potter/Harry Potter 1 - carefully rechecked cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Harry Potter/Harry Potter 1 - carefully rechecked cleaned.txt",
       "sha256": "60b102aea078fb523aa61e6436a95ca3caadb1a16e990749af3521646c99bfd1",
       "byte_size": 463854,
       "word_count": 79657
     },
     {
-      "relative_path": "TEST/Harry Potter/Harry Potter 2 - audited cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Harry Potter/Harry Potter 2 - audited cleaned.txt",
       "sha256": "c74729dedf47eb3096d5065ce83f80883e46a1565cdaa07ceaa279c7f9b681f8",
       "byte_size": 536579,
       "word_count": 90717
     },
     {
-      "relative_path": "TEST/Harry Potter/Harry Potter 3 - carefully rechecked cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Harry Potter/Harry Potter 3 - carefully rechecked cleaned.txt",
       "sha256": "c2ebf9eee102472f9cfd72c6cbb6f29afa13226261ba6a94fdb35f39ccf125cb",
       "byte_size": 652326,
       "word_count": 107060
     },
     {
-      "relative_path": "TEST/Harry Potter/Harry Potter 4 - carefully rechecked cleaned.txt",
+      "relative_path": "FINAL_BENCHMARK/Harry Potter/Harry Potter 4 - carefully rechecked cleaned.txt",
       "sha256": "2a6725d0e1b7625c3f41fe9612b1bd213f20c9228dfb659e10be3257f90e1857",
       "byte_size": 1147808,
       "word_count": 194946
@@ -428,51 +428,51 @@
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 1.cleaned.txt",
-      "sha256": "8ba5a2829bbf5ae24437a6d96b3f3b437b3b5fb890603f0468bbae542920087f",
-      "byte_size": 394508,
-      "word_count": 67829
+      "sha256": "c56f4d2cbe88dd664aae9403e381be2ec0e4366ac81a83214955cc6dfadbeff8",
+      "byte_size": 394465,
+      "word_count": 67785
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 2.cleaned.txt",
-      "sha256": "de21ea47dc168226677036c7740e9efdc3e1b765a787608c93085865c0afd672",
-      "byte_size": 440375,
-      "word_count": 76017
+      "sha256": "347067043afb2cfb887ebebacc323b43ad3ebd7ac6be322070b1e981eb8f5530",
+      "byte_size": 440341,
+      "word_count": 75982
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 3.cleaned.txt",
-      "sha256": "862d2fa79f745af8a931c32a58f136ebd5f3ed2f85c0242c79b5a2e1d8aa0e96",
-      "byte_size": 512901,
-      "word_count": 87602
+      "sha256": "a4817d2ded6647d225fd2779593bf5d5c806b0095dff523efbe06abdc5debcef",
+      "byte_size": 512835,
+      "word_count": 87535
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 4.cleaned.txt",
-      "sha256": "671b389e34e1163a40e87b190973b6d73f2f42289c74e1eadbbff785c8acfc99",
-      "byte_size": 466096,
-      "word_count": 80057
+      "sha256": "428402c06364854279a83e4ad92def42cc0b9781aeade9b31c9d071e73adb4e2",
+      "byte_size": 466045,
+      "word_count": 80005
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 5.cleaned.txt",
-      "sha256": "f4a1a9c380ec1f17e8565f895e29e567e881333452315f8a5e07ebd9f1070107",
-      "byte_size": 470361,
-      "word_count": 80863
+      "sha256": "790a7d9b7bce4ff03ca98b0e256df8c8d7d0e2b1d4e9fcc2d46e833a629209fc",
+      "byte_size": 470306,
+      "word_count": 80807
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 6.cleaned.txt",
-      "sha256": "4df2a793381bf0ade2c76152270902d904e65effce9fc6cdf279dfe4bc051625",
-      "byte_size": 495853,
-      "word_count": 85492
+      "sha256": "0e4c60d43432db3d6bab03437a70c49f02f6a9f348ae84a4cd68d28465e71fe2",
+      "byte_size": 495782,
+      "word_count": 85421
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 7.cleaned.txt",
-      "sha256": "01d020a8850dc224fd6c5cbca981e5e6b2de30041a86a529ed041fe31455ed2b",
-      "byte_size": 409039,
-      "word_count": 70356
+      "sha256": "9500dbbb35078354e707c2682fc9eb50cb39145bdb1cf81a082c96a78da2e597",
+      "byte_size": 409009,
+      "word_count": 70324
     },
     {
       "relative_path": "TRAIN/The Apothecary Diaries/The Apothecary Diaries Volume 8.cleaned.txt",
-      "sha256": "535cf7155ed2f275121f6a2f4f06364e45a4483c0cd77eda7af94fb517afb8f2",
-      "byte_size": 431091,
-      "word_count": 73731
+      "sha256": "acd6e1f53411f3ce9473dd1b16f44e4ba133e62bfb340bf0636af2567d1a7cf1",
+      "byte_size": 431055,
+      "word_count": 73693
     },
     {
       "relative_path": "TRAIN/The Eminence in Shadow/The Eminence in Shadow - Volume 01 - cleaned.txt",
@@ -512,62 +512,62 @@
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 01 - cleaned.txt",
-      "sha256": "23dd943cff31ce0c2938bfead7b4def84ca8f58b28f5a6ed90f5304cb9b250c0",
-      "byte_size": 348359,
+      "sha256": "6008858a131b7a6133704b194450728b02e18a5eb588b3fc617c5014df3df57e",
+      "byte_size": 352706,
       "word_count": 64180
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 02 - cleaned.txt",
-      "sha256": "e481910987026047153130360d725cf8650db9c947446794b43877e7a74be754",
-      "byte_size": 365764,
+      "sha256": "f3c26fdc6a6d77c352399de07548b81d56af10d514616829d4570b28b1426b87",
+      "byte_size": 370020,
       "word_count": 66852
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 03 - cleaned.txt",
-      "sha256": "c584f1bb73336f1112ca97137fd212d9727e392792b076beeb9c3bb279e23139",
-      "byte_size": 392125,
+      "sha256": "8b3789c51511f167ed82494e983e7c330749ceaf5a1804b3a372e898986c6d0c",
+      "byte_size": 396693,
       "word_count": 70692
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 04 - cleaned.txt",
-      "sha256": "ce996909657d0b548c0ff513343b1f1163171fad7fdba0340a6a28984232eccd",
-      "byte_size": 381656,
+      "sha256": "47c7e7c24b51bbe1ad1b188a997180be9f15887e25a62d488ceeeae0f1f4a331",
+      "byte_size": 386455,
       "word_count": 66917
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 05 - cleaned.txt",
-      "sha256": "72ab189d9b3d3fccc3e286d687dec22a95bf5c52ed7bdab89dcb49a17d494e40",
-      "byte_size": 410658,
+      "sha256": "41ca761a55da9902e33b25bf039add2c65df5e3b892692129e1ed7fd24e6c83d",
+      "byte_size": 415416,
       "word_count": 73231
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 06 - cleaned.txt",
-      "sha256": "a0ab6c503ce30edea87faddb736b05cd6ac5813de38c73fc8dcd3053375ca8c7",
-      "byte_size": 431305,
+      "sha256": "8bceaa77cf0d7589c7d0c16b96458b036a78f6033e8b2c26a15e8235044961fa",
+      "byte_size": 436281,
       "word_count": 77114
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 07 - cleaned.txt",
-      "sha256": "bd13369d9529a4ad4251d4854dd867b599739375b87a119262c22dc0b0559483",
-      "byte_size": 412354,
+      "sha256": "b1fa3d81ef44c7dd8d011c833f36efd0aca0f1110539a5fffb380cbfd689fa1f",
+      "byte_size": 415784,
       "word_count": 73516
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 08 - cleaned.txt",
-      "sha256": "d4715039e93bb6c090ee26bab37a96e0e9b577e0e29d0d79d5973aa8b584baa0",
-      "byte_size": 401096,
+      "sha256": "011ba19b6a51abd90cb4be9133a96dea6221b647b4d2e5166fcb10c54a936c9d",
+      "byte_size": 404693,
       "word_count": 71279
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 09 - cleaned.txt",
-      "sha256": "98b0cac9c720e42223e84c8377dac472887b125d314a216f1c53209a545fdccd",
-      "byte_size": 410259,
+      "sha256": "8b17e121ebdb7103c12a31da6c98ecff2a0b1dba5b6a8edb87f4fbedd380c6f8",
+      "byte_size": 414263,
       "word_count": 73247
     },
     {
       "relative_path": "TRAIN/The Rising of the Shield Hero/The Rising of the Shield Hero - Volume 10 - cleaned.txt",
-      "sha256": "c68daef60388101123038b219a8ad09a2cde019f5f18b2c411cca6ccc0f4480a",
-      "byte_size": 433500,
+      "sha256": "ace5948d0c0c90804961f94f33b7723939ea842aab376b6d2a8d4a247db2f074",
+      "byte_size": 437028,
       "word_count": 76857
     },
     {
@@ -591,7 +591,7 @@
   ],
   "totals": {
     "file_count": 98,
-    "byte_size": 41410074,
-    "word_count": 7128310
+    "byte_size": 41451951,
+    "word_count": 7127915
   }
 }
