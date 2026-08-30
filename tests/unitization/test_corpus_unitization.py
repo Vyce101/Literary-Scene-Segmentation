@@ -1,4 +1,4 @@
-# Tests deterministic paragraph-preserving corpus unitization without source books.
+# Tests deterministic block- and record-preserving corpus unitization without source books.
 
 from __future__ import annotations
 
@@ -28,7 +28,7 @@ class CorpusUnitizationTests(unittest.TestCase):
         document = unitize_text(
             'Dr. Smith said, "Wait..." Then she left. He stayed.',
         )
-        units = document["paragraphs"][0]["units"]
+        units = document["blocks"][0]["records"][0]["units"]
 
         self.assertEqual(len(units), 3)
         self.assertIn("Dr. Smith", units[0]["text"])
@@ -37,52 +37,103 @@ class CorpusUnitizationTests(unittest.TestCase):
         self.assertEqual(units[2]["text"].strip(), "He stayed.")
 
         ellipsis_document = unitize_text("Flip . . . flip . . .")
-        ellipsis_paragraph = ellipsis_document["paragraphs"][0]
+        ellipsis_record = ellipsis_document["blocks"][0]["records"][0]
         self.assertEqual(
-            "".join(unit["text"] for unit in ellipsis_paragraph["units"]),
-            ellipsis_paragraph["text"],
+            "".join(unit["text"] for unit in ellipsis_record["units"]),
+            ellipsis_record["text"],
         )
 
-    def test_paragraphs_and_structural_records_remain_grouped(self) -> None:
-        document = unitize_text(
-            "First sentence. Second sentence.\n\n"
-            "Chapter 1\n\n"
-            "Contents ........ 12\n\n"
-            "The scene begins.\nChapter 2\nThe next scene begins.",
-        )
-        paragraphs = document["paragraphs"]
+    def test_each_nonblank_line_is_a_record(self) -> None:
+        examples = [
+            "Part of me wanted to leave. I stayed.",
+            "Book the room. Then call me.",
+            "Notes fell from the desk. He picked them up.",
+        ]
 
-        self.assertEqual(len(paragraphs), 4)
-        self.assertEqual(len(paragraphs[0]["units"]), 2)
-        self.assertEqual([unit["text"].strip() for unit in paragraphs[1]["units"]], ["Chapter 1"])
-        self.assertEqual([unit["text"].strip() for unit in paragraphs[2]["units"]], ["Contents ........ 12"])
+        source = "\n".join(examples + ["\uf0a7 First item", "\uf0a7 Second item"])
+        records = unitize_text(source)["blocks"][0]["records"]
+
+        self.assertEqual(len(records), 5)
+        self.assertEqual([len(record["units"]) for record in records[:3]], [2, 2, 2])
+        self.assertEqual([record["text"] for record in records[3:]], ["• First item", "• Second item"])
+
+    def test_block_record_and_separator_reconstruction_is_exact(self) -> None:
+        source = "  First line.\r\nSecond line.\r\n\r\n"
+        document = unitize_text(source)
+        block = document["blocks"][0]
+
         self.assertEqual(
-            [unit["text"].strip() for unit in paragraphs[3]["units"]],
-            ["The scene begins.", "Chapter 2", "The next scene begins."],
+            "".join(
+                record["text"] + record["line_separator"]
+                for record in block["records"]
+            ),
+            "  First line.\r\nSecond line.\r\n",
         )
+        self.assertEqual(block["separator_after"], "\r\n")
+        self.assertEqual(document["leading_separator"], "")
+
+    def test_leading_separator_is_preserved(self) -> None:
+        document = unitize_text("\n\nFirst line.")
+
+        self.assertEqual(document["leading_separator"], "\n\n")
+        self.assertEqual(document["blocks"][0]["records"][0]["text"], "First line.")
 
     def test_ids_are_unique_sequential_and_reset_per_book(self) -> None:
         first = unitize_text("One. Two.")
         second = unitize_text("Another book.")
 
-        first_ids = [unit["id"] for paragraph in first["paragraphs"] for unit in paragraph["units"]]
-        second_ids = [unit["id"] for paragraph in second["paragraphs"] for unit in paragraph["units"]]
+        first_ids = [
+            unit["id"]
+            for block in first["blocks"]
+            for record in block["records"]
+            for unit in record["units"]
+        ]
+        second_ids = [
+            unit["id"]
+            for block in second["blocks"]
+            for record in block["records"]
+            for unit in record["units"]
+        ]
         self.assertEqual(first_ids, ["000001", "000002"])
         self.assertEqual(len(first_ids), len(set(first_ids)))
         self.assertEqual(second_ids, ["000001"])
 
-    def test_unit_text_preserves_normalized_paragraph_text(self) -> None:
+    def test_unit_text_preserves_normalized_record_text(self) -> None:
         source = "  Alpha  beta.\tGamma\n\nHeading\u00a0two"
         document = unitize_text(source)
 
-        expected_paragraphs = normalize_source_text(source).split("\n\n")
-        actual_paragraphs = [paragraph["text"] for paragraph in document["paragraphs"]]
-        self.assertEqual(actual_paragraphs, expected_paragraphs)
-        for paragraph in document["paragraphs"]:
-            self.assertEqual(
-                "".join(unit["text"] for unit in paragraph["units"]),
-                paragraph["text"],
+        expected_records = ["  Alpha  beta.\tGamma", "Heading two"]
+        actual_records = [
+            record["text"]
+            for block in document["blocks"]
+            for record in block["records"]
+        ]
+        self.assertEqual(actual_records, expected_records)
+        for block in document["blocks"]:
+            for record in block["records"]:
+                self.assertEqual(
+                    "".join(unit["text"] for unit in record["units"]),
+                    record["text"],
+                )
+
+    def test_blocks_reconstruct_normalized_source_with_separators(self) -> None:
+        source = "\n  First.\nSecond.\n\n\nThird.\n"
+        document = unitize_text(source)
+        reconstructed = document["leading_separator"]
+        for block in document["blocks"]:
+            reconstructed += "".join(
+                record["text"] + record["line_separator"]
+                for record in block["records"]
             )
+            reconstructed += block["separator_after"]
+
+        self.assertEqual(reconstructed, normalize_source_text(source))
+        for block in document["blocks"]:
+            for record in block["records"]:
+                self.assertEqual(
+                    "".join(unit["text"] for unit in record["units"]),
+                    record["text"],
+                )
 
     def test_corpus_is_recursive_mirrored_and_does_not_modify_raw(self) -> None:
         with tempfile.TemporaryDirectory() as temporary_directory:

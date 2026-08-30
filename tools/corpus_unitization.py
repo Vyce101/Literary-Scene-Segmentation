@@ -1,4 +1,4 @@
-# Unitizes raw UTF-8 books into deterministic, paragraph-preserving JSON records.
+# Unitizes raw UTF-8 books into deterministic, block- and record-preserving JSON.
 
 from __future__ import annotations
 
@@ -14,21 +14,6 @@ from pysbd import Segmenter
 DEFAULT_RAW_ROOT = Path("data/raw")
 DEFAULT_OUTPUT_ROOT = Path("data/processed/unitized")
 UNIT_ID_WIDTH = 6
-
-_PARAGRAPH_SEPARATOR = re.compile(
-    r"(?:\r\n|\r|\n)[ \t]*(?:(?:\r\n|\r|\n)[ \t]*)+"
-)
-_STRUCTURAL_LABEL = re.compile(
-    r"^\s*(?:"
-    r"chapter|part|book|volume|prologue|epilogue|appendix|preface|"
-    r"foreword|afterword|acknowledg(?:e)?ments?|dedication|contents|"
-    r"table\s+of\s+contents|copyright|publication|bibliography|index|notes"
-    r")\b",
-    re.IGNORECASE,
-)
-_TOC_RECORD = re.compile(r"^\s*\S.+?(?:\.{2,}|\s{2,})\s*\d+\s*$")
-_PAGE_RECORD = re.compile(r"^\s*(?:page\s+)?\d+\s*$", re.IGNORECASE)
-_ORNAMENT_RECORD = re.compile(r"^\s*[•*_=~—-]{2,}\s*$")
 
 
 def normalize_source_text(text: str) -> str:
@@ -56,46 +41,46 @@ def _text_files(root: Path) -> Iterable[Path]:
     )
 
 
-def _split_paragraphs(text: str) -> list[str]:
-    paragraphs = [paragraph for paragraph in _PARAGRAPH_SEPARATOR.split(text) if paragraph]
-    return paragraphs
+def _split_line_ending(line: str) -> tuple[str, str]:
+    if line.endswith("\r\n"):
+        return line[:-2], "\r\n"
+    if line.endswith(("\r", "\n")):
+        return line[:-1], line[-1]
+    return line, ""
 
 
-def _is_structural_line(line: str) -> bool:
-    content = line.strip()
-    if not content:
-        return False
-    return bool(
-        _STRUCTURAL_LABEL.match(content)
-        or _TOC_RECORD.match(content)
-        or _PAGE_RECORD.match(content)
-        or _ORNAMENT_RECORD.match(content)
-    )
+def _split_blocks(text: str) -> tuple[str, list[dict[str, object]]]:
+    leading_separator = ""
+    blocks: list[dict[str, object]] = []
+    records: list[tuple[str, str]] = []
+    block_separator = ""
 
+    for line in text.splitlines(keepends=True):
+        record_text, line_separator = _split_line_ending(line)
+        if record_text.strip():
+            records.append((record_text, line_separator))
+            continue
 
-def _split_structural_lines(paragraph: str) -> list[str] | None:
-    lines = paragraph.splitlines(keepends=True)
-    if len(lines) == 1:
-        return [paragraph] if _is_structural_line(lines[0]) else None
-    if not any(_is_structural_line(line) for line in lines):
-        return None
-
-    units: list[str] = []
-    prose_lines: list[str] = []
-
-    def flush_prose() -> None:
-        if prose_lines:
-            units.extend(_segment_prose("".join(prose_lines)))
-            prose_lines.clear()
-
-    for line in lines:
-        if _is_structural_line(line):
-            flush_prose()
-            units.append(line)
+        if records:
+            blocks.append(
+                {
+                    "records": records,
+                    "separator_after": block_separator + line,
+                }
+            )
+            records = []
+            block_separator = ""
+        elif blocks:
+            blocks[-1]["separator_after"] = (
+                str(blocks[-1]["separator_after"]) + line
+            )
         else:
-            prose_lines.append(line)
-    flush_prose()
-    return units
+            leading_separator += line
+
+    if records:
+        blocks.append({"records": records, "separator_after": ""})
+
+    return leading_separator, blocks
 
 
 def _segment_prose(text: str, segmenter: Segmenter | None = None) -> list[str]:
@@ -136,42 +121,63 @@ def _segment_prose(text: str, segmenter: Segmenter | None = None) -> list[str]:
 
 
 def unitize_text(text: str, source_path: str | None = None) -> dict[str, object]:
-    """Return a deterministic nested paragraph/unit representation of one book."""
+    """Return a deterministic nested block/record/unit representation of one book."""
 
     normalized_text = normalize_source_text(text)
     segmenter = Segmenter(language="en", clean=False, char_span=True)
-    paragraphs: list[dict[str, object]] = []
+    leading_separator, source_blocks = _split_blocks(normalized_text)
+    blocks: list[dict[str, object]] = []
     next_unit_number = 1
 
-    for paragraph_index, paragraph_text in enumerate(
-        _split_paragraphs(normalized_text), start=1
-    ):
-        structural_units = _split_structural_lines(paragraph_text)
-        paragraph_units = structural_units or _segment_prose(paragraph_text, segmenter)
-        units = []
-        for unit_text in paragraph_units:
-            units.append(
+    for block_index, source_block in enumerate(source_blocks, start=1):
+        records: list[dict[str, object]] = []
+        for record_index, (record_text, line_separator) in enumerate(
+            source_block["records"], start=1
+        ):
+            units = []
+            for unit_text in _segment_prose(record_text, segmenter):
+                units.append(
+                    {
+                        "id": f"{next_unit_number:0{UNIT_ID_WIDTH}d}",
+                        "text": unit_text,
+                    }
+                )
+                next_unit_number += 1
+            if "".join(unit["text"] for unit in units) != record_text:
+                raise ValueError(
+                    f"unitization changed record text at block {block_index}, "
+                    f"record {record_index}"
+                )
+            records.append(
                 {
-                    "id": f"{next_unit_number:0{UNIT_ID_WIDTH}d}",
-                    "text": unit_text,
+                    "record_index": record_index,
+                    "text": record_text,
+                    "line_separator": line_separator,
+                    "units": units,
                 }
             )
-            next_unit_number += 1
-        if "".join(unit["text"] for unit in units) != paragraph_text:
-            raise ValueError(
-                f"unitization changed paragraph text at paragraph {paragraph_index}"
-            )
-        paragraphs.append(
+        block_text = "".join(
+            str(record["text"]) + str(record["line_separator"])
+            for record in records
+        )
+        expected_block_text = "".join(
+            record_text + line_separator
+            for record_text, line_separator in source_block["records"]
+        )
+        if block_text != expected_block_text:
+            raise ValueError(f"block reconstruction failed at block {block_index}")
+        blocks.append(
             {
-                "paragraph_index": paragraph_index,
-                "text": paragraph_text,
-                "units": units,
+                "block_index": block_index,
+                "records": records,
+                "separator_after": source_block["separator_after"],
             }
         )
 
     result: dict[str, object] = {
         "schema_version": 1,
-        "paragraphs": paragraphs,
+        "leading_separator": leading_separator,
+        "blocks": blocks,
     }
     if source_path is not None:
         result["source_path"] = source_path
