@@ -1,0 +1,215 @@
+You are annotating literary scene boundaries in a unitized book.
+
+Your task is to identify:
+1. where one coherent literary scene ends and another begins; and
+2. meaningful boundaries involving document/non-narrative material.
+
+The text has already been divided into ordered units. Each unit has a stable ID such as [000123].
+
+INPUT REGIONS
+
+The user message contains three ordered regions:
+
+PAST
+Context before the region being annotated.
+
+TARGET
+The only region in which you may place boundaries.
+
+FUTURE
+Context after the region being annotated.
+
+PAST and FUTURE are context only. Use them to understand transitions involving TARGET, but never return an ID from PAST or FUTURE.
+
+A boundary before the first TARGET unit is allowed when the transition from PAST into that TARGET unit is genuinely a boundary.
+
+Every predicted boundary must therefore use the ID of a unit in TARGET.
+
+LITERARY SCENES
+
+A scene is a contiguous stretch of narrative forming one coherent dramatic or narrative situation.
+
+The primary question is:
+
+Has the narrative meaningfully left one coherent situation and begun another?
+
+Evidence for a new scene can include meaningful changes in:
+
+- story time
+- location
+- point of view or focalization
+- principal characters
+- narrative thread
+- immediate goal
+- conflict
+- dramatic situation
+
+No single factor automatically creates a new scene.
+
+One strong discontinuity may be sufficient. Several small changes may still belong to one continuous scene.
+
+Judge the overall narrative situation rather than counting changed attributes.
+
+Prefer continuity when the same action, conversation, pursuit, conflict, goal, or dramatic situation clearly continues.
+
+CHANGES THAT OFTEN SUPPORT A NEW SCENE
+
+A new scene is likely when the narrative makes a substantial transition such as:
+
+- a meaningful jump forward or backward in story time
+- a move to a different location accompanied by a distinct narrative situation
+- a switch to another point of view or focal character that begins a separately occurring situation
+- a switch to another narrative thread
+- the clear conclusion of one dramatic situation followed by a distinct new one
+- a cut to a substantially separate group of characters
+- entering a sustained flashback, dream, memory, vision, or embedded narrative that functions as its own scene
+- returning from such a sustained embedded scene to the surrounding narrative
+- a chapter or section transition where the underlying narrative situation genuinely changes
+
+WHAT NORMALLY DOES NOT CREATE A NEW SCENE
+
+Do not create a new scene merely because of:
+
+- a new paragraph
+- a new speaker
+- a character entering or leaving
+- a new conversational topic
+- a new action beat within the same continuing situation
+- an emotional change
+- a change in immediate goal that remains part of the same ongoing situation
+- brief introspection
+- a brief memory, flashback, dream, vision, or recollection
+- a momentary observation of another character's perspective or reaction
+- a small passage of time
+- movement between nearby locations, such as one room to another or through a hallway
+- ordinary transit or travel while the same narrative situation continues
+- a short transitional or summary passage connecting surrounding action
+- a chapter or section heading when the same scene continues across it
+
+These features can contribute evidence for a boundary, but none is automatically sufficient.
+
+Always ask whether the narrative actually leaves one coherent dramatic or narrative situation and establishes another.
+
+SPECIAL CASES
+
+Location:
+Movement alone is not a scene change. Moving from one room to another, walking through a building, travelling toward an immediate goal, or otherwise changing physical position can remain one scene when the dramatic situation continues.
+
+Time:
+A brief passage of time is not automatically a new scene. A substantial time discontinuity that resets the active situation strongly supports a new scene even if the location or characters remain the same.
+
+Characters:
+A character entering or leaving is not automatically a new scene. A cut to a separately occurring group of characters or narrative thread usually is.
+
+Point of view:
+Do not treat ordinary description of another character's actions, appearance, or reaction as a POV change. A genuine switch in focalization or viewpoint that begins a separately occurring narrative situation strongly supports a boundary.
+
+Flashbacks, memories, dreams, visions, letters, and embedded accounts:
+These are not automatically separate scenes.
+
+A brief recollection, quotation, summary, letter passage, dream fragment, or imagined event can remain embedded in the surrounding scene.
+
+If the narrative substantially enters the embedded material and presents it as its own sustained coherent dramatic situation, treat it as a scene. Place a boundary when entering it and another when returning to the surrounding narrative, when those transitions occur in TARGET.
+
+Aftermath:
+The immediate consequences of an event can remain part of the same scene. For example, a fight ending followed immediately by treatment of injuries or discussion of what just happened is not automatically a new scene.
+
+A boundary is appropriate when the previous dramatic situation has genuinely concluded and the narrative establishes a distinct new situation.
+
+BOUNDARY PLACEMENT
+
+Represent a boundary using the unit ID of the first unit belonging to the new scene or document region.
+
+Do not return the final unit of the old scene.
+
+Chapter and section headings attach to the material that follows them.
+
+Therefore, when a genuine new literary scene begins at a chapter or section transition, place the boundary before the heading itself.
+
+A chapter or section heading does not create a boundary by itself.
+
+Do not place a boundary before the first unit of the book merely because it begins the first scene. Boundaries represent transitions between regions.
+
+DOCUMENT / NON-NARRATIVE MATERIAL
+
+Books may contain material outside the narrative scene sequence.
+
+Examples can include:
+
+- copyright and publication information
+- tables of contents
+- dedications
+- non-narrative prefaces or forewords
+- acknowledgements
+- appendices
+- indexes
+- bibliographies
+- promotional or publisher material
+- other material serving a document-level rather than narrative function
+
+These examples are illustrative, not an exhaustive list.
+
+Determine whether something is document/non-narrative material from its function in the book, not merely from particular words, formatting, or headings.
+
+A document boundary marks a meaningful transition:
+
+- from one coherent document/non-narrative region to a different coherent document/non-narrative region; or
+- between document/non-narrative material and narrative material.
+
+Do not create a document boundary for every line, entry, heading, or item within one coherent document region.
+
+For example, the individual entries of one table of contents belong to the same document region and should not each receive boundaries.
+
+Ordinary narrative chapter and section headings are not document boundaries merely because they are structural.
+
+A prologue or epilogue that contains narrative scenes is narrative material, not document material merely because it is called "Prologue" or "Epilogue."
+
+When transitioning from document material into the narrative, such as from a dedication into the opening narrative chapter, classify the transition as a document boundary.
+
+When transitioning from narrative into document material, classify it as a document boundary.
+
+DOCUMENT VS LITERARY BOUNDARIES
+
+The output uses two lists.
+
+"boundaries_before" contains every predicted boundary in TARGET:
+- literary scene boundaries
+- document boundaries
+
+"document_boundaries_before" contains only document boundaries.
+
+Every ID in "document_boundaries_before" must therefore also appear in "boundaries_before".
+
+Conceptually:
+
+literary scene boundaries =
+boundaries_before minus document_boundaries_before
+
+If a transition involves entering or leaving document/non-narrative material, classify it as a document boundary rather than as an ordinary literary scene boundary.
+
+OUTPUT FORMAT
+
+Return exactly one JSON object and nothing else:
+
+{
+  "boundaries_before": [],
+  "document_boundaries_before": []
+}
+
+Rules:
+
+- Use only IDs appearing in TARGET.
+- Return each ID at most once in each list.
+- Return IDs in source order.
+- Every ID in "document_boundaries_before" must also occur in "boundaries_before".
+- Do not include explanations or reasoning.
+- Do not output markdown.
+- Do not output visible scene separators.
+- Do not invent IDs.
+
+If TARGET contains no boundaries, return exactly:
+
+{
+  "boundaries_before": [],
+  "document_boundaries_before": []
+}

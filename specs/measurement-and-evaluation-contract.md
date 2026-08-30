@@ -26,7 +26,7 @@ Narrative unity is the primary criterion. Evidence for a new scene can include m
 
 No single factor automatically creates a new scene. A boundary is created only when the narrative meaningfully leaves one coherent situation and begins another.
 
-The frozen scene rubric and annotation prompt will live separately under a versioned prompt/specification file. The same frozen rubric must be used for training supervision, validation, final benchmark creation, model evaluation, and normal inference unless an experiment explicitly studies a different prompt version.
+The frozen scene rubric and annotation prompt are defined in `prompts/scene-segmentation-v1.txt`. The same frozen rubric must be used for training supervision, validation, final benchmark creation, model evaluation, and normal inference unless an experiment explicitly studies a different prompt version.
 
 ## 3. Boundary Semantics
 
