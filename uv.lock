@@ -1,0 +1,22 @@
+version = 1
+revision = 3
+requires-python = ">=3.12"
+
+[[package]]
+name = "literary-scene-segmentation"
+version = "0.1.0"
+source = { virtual = "." }
+dependencies = [
+    { name = "pysbd" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "pysbd", specifier = "==0.3.4" }]
+
+[[package]]
+name = "pysbd"
+version = "0.3.4"
+source = { registry = "https://pypi.org/simple" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/48/0a/c99fb7d7e176f8b176ef19704a32e6a9c6aafdf19ef75a187f701fc15801/pysbd-0.3.4-py3-none-any.whl", hash = "sha256:cd838939b7b0b185fcf86b0baf6636667dfb6e474743beeff878e9f42e022953", size = 71082, upload-time = "2021-02-11T16:36:33.351Z" },
+]
