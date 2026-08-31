@@ -7,6 +7,7 @@ import unittest
 from tools.training_preflight import (
     IGNORE_INDEX,
     build_synthetic_example,
+    build_parser,
     serialize_training_example,
 )
 
@@ -35,6 +36,27 @@ class CharacterTokenizer:
 
 
 class TrainingPreflightTests(unittest.TestCase):
+    def test_attention_implementation_defaults_to_sdpa_and_is_configurable(self) -> None:
+        parser = build_parser()
+        self.assertEqual(
+            parser.parse_args(["--method", "lora", "--sequence-length", "1024"])
+            .attn_implementation,
+            "sdpa",
+        )
+        self.assertEqual(
+            parser.parse_args(
+                [
+                    "--method",
+                    "full",
+                    "--sequence-length",
+                    "1024",
+                    "--attn-implementation",
+                    "eager",
+                ]
+            ).attn_implementation,
+            "eager",
+        )
+
     def test_masks_system_and_user_but_not_assistant_response(self) -> None:
         tokenizer = CharacterTokenizer()
         example = serialize_training_example(

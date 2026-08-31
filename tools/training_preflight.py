@@ -18,6 +18,7 @@ from tools.window_generation import (
 
 
 DEFAULT_MODEL_NAME = "Qwen/Qwen3.5-0.8B-Base"
+DEFAULT_ATTENTION_IMPLEMENTATION = "sdpa"
 DEFAULT_STEPS = 3
 DEFAULT_WARMUP_STEPS = 1
 DEFAULT_LEARNING_RATE = 2e-4
@@ -71,6 +72,7 @@ class PreflightConfig:
     steps: int = DEFAULT_STEPS
     warmup_steps: int = DEFAULT_WARMUP_STEPS
     model_name: str = DEFAULT_MODEL_NAME
+    attention_implementation: str = DEFAULT_ATTENTION_IMPLEMENTATION
     prompt_path: Path = DEFAULT_PROMPT_PATH
     learning_rate: float = DEFAULT_LEARNING_RATE
     lora_rank: int = DEFAULT_LORA_RANK
@@ -277,7 +279,7 @@ def _load_model_and_tokenizer(config: PreflightConfig) -> tuple[Any, Any, Any, A
     model = auto_model_class.from_pretrained(
         config.model_name,
         torch_dtype=torch.float16,
-        attn_implementation="eager",
+        attn_implementation=config.attention_implementation,
     )
     model.to(torch.device("cuda:0"))
     return torch, tokenizer, model, peft_symbols
@@ -430,6 +432,7 @@ def _metric_report(
     return {
         "method": config.method,
         "model": config.model_name,
+        "attention_implementation": config.attention_implementation,
         "requested_sequence_length": config.sequence_length,
         "actual_serialized_token_count": example.serialized_token_count,
         "trainable_parameter_count": trainable,
@@ -474,6 +477,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--method", choices=("lora", "full"), required=True)
     parser.add_argument("--sequence-length", type=int, required=True)
     parser.add_argument("--model", default=DEFAULT_MODEL_NAME)
+    parser.add_argument(
+        "--attn-implementation",
+        choices=("sdpa", "eager"),
+        default=DEFAULT_ATTENTION_IMPLEMENTATION,
+        help="Transformers attention implementation; defaults to SDPA",
+    )
     parser.add_argument("--prompt-path", type=Path, default=DEFAULT_PROMPT_PATH)
     parser.add_argument("--steps", type=int, default=DEFAULT_STEPS)
     parser.add_argument("--warmup-steps", type=int, default=DEFAULT_WARMUP_STEPS)
@@ -505,6 +514,7 @@ def main() -> None:
         steps=args.steps,
         warmup_steps=args.warmup_steps,
         model_name=args.model,
+        attention_implementation=args.attn_implementation,
         prompt_path=args.prompt_path,
         learning_rate=args.learning_rate,
         lora_rank=args.lora_rank,
