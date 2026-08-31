@@ -3,11 +3,15 @@
 from __future__ import annotations
 
 import unittest
+from types import SimpleNamespace
+
+import torch
 
 from tools.training_preflight import (
     IGNORE_INDEX,
     build_synthetic_example,
     build_parser,
+    selective_completion_loss,
     serialize_training_example,
 )
 
@@ -36,6 +40,48 @@ class CharacterTokenizer:
 
 
 class TrainingPreflightTests(unittest.TestCase):
+    def test_selective_loss_uses_only_causal_predictions_for_supervised_targets(self) -> None:
+        full_logits = torch.tensor(
+            [
+                [
+                    [0.0, 1.0, 2.0, 3.0],
+                    [4.0, 3.0, 2.0, 1.0],
+                    [1.0, 3.0, 0.0, 2.0],
+                    [2.0, 0.0, 4.0, 1.0],
+                    [3.0, 1.0, 2.0, 5.0],
+                    [5.0, 2.0, 1.0, 0.0],
+                ]
+            ],
+            requires_grad=True,
+        )
+
+        class SelectiveModel:
+            def __init__(self) -> None:
+                self.logits_to_keep = None
+                self.received_labels = "unset"
+
+            def __call__(self, **kwargs):
+                self.logits_to_keep = kwargs["logits_to_keep"]
+                self.received_labels = kwargs["labels"]
+                logits = full_logits.index_select(1, self.logits_to_keep)
+                return SimpleNamespace(logits=logits)
+
+        model = SelectiveModel()
+        labels = torch.tensor([[-100, -100, 2, -100, 3, -100]])
+        loss = selective_completion_loss(
+            model,
+            torch.zeros((1, 6), dtype=torch.long),
+            torch.ones((1, 6), dtype=torch.long),
+            labels,
+        )
+        expected = torch.nn.functional.cross_entropy(
+            full_logits[:, [1, 3], :].reshape(-1, 4),
+            torch.tensor([2, 3]),
+        )
+        self.assertTrue(torch.equal(model.logits_to_keep, torch.tensor([1, 3])))
+        self.assertIsNone(model.received_labels)
+        self.assertTrue(torch.allclose(loss, expected))
+
     def test_attention_implementation_defaults_to_sdpa_and_is_configurable(self) -> None:
         parser = build_parser()
         self.assertEqual(

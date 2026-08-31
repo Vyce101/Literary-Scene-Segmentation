@@ -237,12 +237,11 @@ def build_synthetic_example(
     return candidate(lower)
 
 
-def _load_training_dependencies() -> tuple[Any, Any, Any, Any]:
+def _load_training_dependencies() -> tuple[Any, Any, Any, Any, Any]:
     try:
         import torch
         from peft import LoraConfig, TaskType, get_peft_model
-        import transformers
-        from transformers import AutoTokenizer
+        from transformers import AutoConfig, AutoModelForCausalLM, AutoTokenizer
     except ImportError as error:
         raise TrainingPreflightError(
             "training preflight requires torch, peft, and transformers in the project "
@@ -251,38 +250,59 @@ def _load_training_dependencies() -> tuple[Any, Any, Any, Any]:
     return (
         torch,
         AutoTokenizer,
-        _load_model_class(transformers),
+        AutoModelForCausalLM,
         (LoraConfig, TaskType, get_peft_model),
+        AutoConfig,
     )
 
 
-def _load_model_class(transformers_module: Any) -> Any:
-    """Support the official multimodal auto class across Transformers releases."""
+def _validate_text_checkpoint_loading(loading_info: dict[str, Any]) -> dict[str, Any]:
+    problems = {
+        name: list(loading_info.get(name, ()))
+        for name in ("missing_keys", "unexpected_keys", "mismatched_keys", "error_msgs")
+    }
+    if any(problems.values()):
+        raise TrainingPreflightError(
+            "text-only checkpoint verification failed: " + json.dumps(problems)
+        )
+    return {
+        "path": "qwen3_5_text_causal_lm",
+        "verified_missing_keys": 0,
+        "verified_unexpected_keys": 0,
+        "verified_mismatched_keys": 0,
+        "vision_parameters_loaded": 0,
+        "vision_parameters_excluded": True,
+    }
 
-    model_class = getattr(transformers_module, "AutoModelForImageTextToText", None)
-    if model_class is not None:
-        return model_class
-    model_class = getattr(transformers_module, "AutoModelForMultimodalLM", None)
-    if model_class is not None:
-        return model_class
-    raise TrainingPreflightError(
-        "installed Transformers does not provide a multimodal Qwen model auto class"
-    )
 
-
-def _load_model_and_tokenizer(config: PreflightConfig) -> tuple[Any, Any, Any, Any]:
-    torch, auto_tokenizer_class, auto_model_class, peft_symbols = _load_training_dependencies()
+def _load_model_and_tokenizer(config: PreflightConfig) -> tuple[Any, Any, Any, Any, Any]:
+    (
+        torch,
+        auto_tokenizer_class,
+        auto_model_class,
+        peft_symbols,
+        auto_config_class,
+    ) = _load_training_dependencies()
     if not torch.cuda.is_available():
         raise TrainingPreflightError("CUDA is required; this preflight targets one NVIDIA T4")
     torch.cuda.set_device(0)
     tokenizer = auto_tokenizer_class.from_pretrained(config.model_name)
-    model = auto_model_class.from_pretrained(
+    checkpoint_config = auto_config_class.from_pretrained(config.model_name)
+    text_config = getattr(checkpoint_config, "text_config", None)
+    if text_config is None or getattr(text_config, "model_type", None) != "qwen3_5_text":
+        raise TrainingPreflightError(
+            "checkpoint does not expose the expected qwen3_5_text configuration"
+        )
+    model, loading_info = auto_model_class.from_pretrained(
         config.model_name,
-        torch_dtype=torch.float16,
+        config=text_config,
+        dtype=torch.float16,
         attn_implementation=config.attention_implementation,
+        output_loading_info=True,
     )
+    loading_report = _validate_text_checkpoint_loading(loading_info)
     model.to(torch.device("cuda:0"))
-    return torch, tokenizer, model, peft_symbols
+    return torch, tokenizer, model, peft_symbols, loading_report
 
 
 def _configure_model(model: Any, config: PreflightConfig, peft_symbols: Any) -> Any:
@@ -318,6 +338,41 @@ def _parameter_report(model: Any) -> tuple[int, int, float]:
     return trainable, total, (100.0 * trainable / total if total else 0.0)
 
 
+def selective_completion_loss(
+    model: Any,
+    input_ids: Any,
+    attention_mask: Any,
+    labels: Any,
+) -> Any:
+    """Compute completion loss while asking Qwen for logits only at needed positions."""
+
+    import torch
+
+    if labels.ndim != 2 or labels.shape[0] != 1:
+        raise TrainingPreflightError("selective completion loss currently requires batch size 1")
+    supervised_positions = torch.nonzero(
+        labels[0].ne(IGNORE_INDEX), as_tuple=False
+    ).flatten()
+    if supervised_positions.numel() == 0:
+        raise TrainingPreflightError("training example contains no supervised assistant tokens")
+    prediction_positions = supervised_positions - 1
+    if bool(prediction_positions.lt(0).any()):
+        raise TrainingPreflightError("a supervised assistant token has no causal prediction position")
+
+    output = model(
+        input_ids=input_ids,
+        attention_mask=attention_mask,
+        labels=None,
+        logits_to_keep=prediction_positions,
+    )
+    logits = output.logits
+    targets = labels[0].index_select(0, supervised_positions)
+    return torch.nn.functional.cross_entropy(
+        logits.reshape(-1, logits.shape[-1]),
+        targets,
+    )
+
+
 def _run_step(
     torch: Any,
     model: Any,
@@ -332,14 +387,14 @@ def _run_step(
     )
     labels = torch.tensor((example.labels,), dtype=torch.long, device=device)
     optimizer.zero_grad(set_to_none=True)
-    with torch.cuda.amp.autocast(dtype=torch.float16):
-        output = model(input_ids=input_ids, attention_mask=attention_mask, labels=labels)
-    if output.loss is None or not torch.isfinite(output.loss):
+    with torch.autocast(device_type="cuda", dtype=torch.float16):
+        loss = selective_completion_loss(model, input_ids, attention_mask, labels)
+    if not torch.isfinite(loss):
         raise TrainingPreflightError("model returned a non-finite training loss")
-    scaler.scale(output.loss).backward()
+    scaler.scale(loss).backward()
     scaler.step(optimizer)
     scaler.update()
-    return float(output.loss.detach().item())
+    return float(loss.detach().item())
 
 
 def run_preflight(config: PreflightConfig) -> dict[str, Any]:
@@ -354,7 +409,7 @@ def run_preflight(config: PreflightConfig) -> dict[str, Any]:
     if not 0 <= config.lora_dropout < 1:
         raise TrainingPreflightError("LoRA dropout must be in [0, 1)")
 
-    torch, tokenizer, model, peft_symbols = _load_model_and_tokenizer(config)
+    torch, tokenizer, model, peft_symbols, loading_report = _load_model_and_tokenizer(config)
     torch.manual_seed(config.seed)
     torch.cuda.manual_seed_all(config.seed)
     system_message = _read_prompt(config.prompt_path)
@@ -368,7 +423,7 @@ def run_preflight(config: PreflightConfig) -> dict[str, Any]:
         (parameter for parameter in model.parameters() if parameter.requires_grad),
         lr=config.learning_rate,
     )
-    scaler = torch.cuda.amp.GradScaler()
+    scaler = torch.amp.GradScaler("cuda")
     torch.cuda.empty_cache()
     torch.cuda.reset_peak_memory_stats(device)
     durations: list[float] = []
@@ -394,6 +449,7 @@ def run_preflight(config: PreflightConfig) -> dict[str, Any]:
             torch.cuda.max_memory_allocated(device),
             torch.cuda.max_memory_reserved(device),
             status="cuda_oom",
+            loading_report=loading_report,
         )
     return _metric_report(
         config,
@@ -407,6 +463,7 @@ def run_preflight(config: PreflightConfig) -> dict[str, Any]:
         torch.cuda.max_memory_reserved(device),
         status="success",
         losses=losses,
+        loading_report=loading_report,
     )
 
 
@@ -427,11 +484,13 @@ def _metric_report(
     *,
     status: str,
     losses: Sequence[float] = (),
+    loading_report: dict[str, Any],
 ) -> dict[str, Any]:
     measured_step = _mean_or_none(measured_durations)
     return {
         "method": config.method,
         "model": config.model_name,
+        "model_loading": loading_report,
         "attention_implementation": config.attention_implementation,
         "requested_sequence_length": config.sequence_length,
         "actual_serialized_token_count": example.serialized_token_count,
