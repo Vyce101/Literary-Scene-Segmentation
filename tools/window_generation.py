@@ -178,6 +178,30 @@ def _token_counts(tokenizer: Any, texts: Sequence[str]) -> tuple[int, ...]:
     return tuple(_token_count(tokenizer, text) for text in texts)
 
 
+def chat_template_token_ids(
+    tokenizer: Any,
+    messages: Sequence[Mapping[str, str]],
+    add_generation_prompt: bool,
+) -> tuple[int, ...]:
+    """Serialize chat messages with the tokenizer's exact template and return IDs."""
+
+    backend = getattr(tokenizer, "_tokenizer", None)
+    if backend is not None:
+        rendered = tokenizer.apply_chat_template(
+            list(messages),
+            tokenize=False,
+            add_generation_prompt=add_generation_prompt,
+        )
+        return tuple(backend.encode(rendered, add_special_tokens=False).ids)
+
+    serialized = tokenizer.apply_chat_template(
+        list(messages),
+        tokenize=True,
+        add_generation_prompt=add_generation_prompt,
+    )
+    return tuple(_token_ids(serialized))
+
+
 def serialized_input_token_count(tokenizer: Any, system_message: str, user_message: str) -> int:
     """Count the exact chat-template serialization including generation prompt."""
 
@@ -185,21 +209,7 @@ def serialized_input_token_count(tokenizer: Any, system_message: str, user_messa
         {"role": "system", "content": system_message},
         {"role": "user", "content": user_message},
     ]
-    backend = getattr(tokenizer, "_tokenizer", None)
-    if backend is not None:
-        rendered = tokenizer.apply_chat_template(
-            messages,
-            tokenize=False,
-            add_generation_prompt=True,
-        )
-        return len(backend.encode(rendered, add_special_tokens=False).ids)
-
-    serialized = tokenizer.apply_chat_template(
-        messages,
-        tokenize=True,
-        add_generation_prompt=True,
-    )
-    return len(_token_ids(serialized))
+    return len(chat_template_token_ids(tokenizer, messages, add_generation_prompt=True))
 
 
 def partition_targets(
